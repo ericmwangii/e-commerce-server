@@ -9,7 +9,7 @@ const pool = new Pool({
   port: process.env.port,
 });
 
-const getPorduct = (request, response) => {
+const getProduct = (request, response) => {
   let name = request.query.name;
 
   pool.query(
@@ -24,4 +24,4 @@ const getPorduct = (request, response) => {
   );
 };
 
-module.exports = { getPorduct };
+module.exports = { getProduct };

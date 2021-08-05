@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  db:
+    image: postgres
+    env_file: ./.env
+    environment:
+      POSTGRES_PASSWORD: sf90hv6
+      POSTGRES_USER: eric
+      host: localhost
+      database: advprog
+      password: sf90hv6
+      port: 5432
+    volumes:
+      - ./pgdata:/var/lib/postgres/data
+    #  ports:
+    #    - port: 5432
+
+  products:
+    build: ./products
+    ports:
+      - "127.0.0.1:5000:5000"
+    depends_on:
+      - db
+
+  reviews:
+    build: ./reviews
+    ports:
+      - "127.0.0.1:5002:5002"
+    depends_on:
+      - db
+
+  searchproducts:
+    build: ./searchproducts
+    ports:
+      - "127.0.0.1:5001:8001"
+    depends_on:
+      - db

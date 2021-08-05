@@ -1,12 +1,13 @@
 const express = require("express");
-const cors = require("cors");
 const app = express();
+const cors = require("cors");
 const api = require("./api");
+const upload = require("./multer");
 require("dotenv").config();
 
-const PORT = process.env.PORT || 5001;
-
 app.use(cors());
+
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -20,12 +21,16 @@ app.use(function (request, response, next) {
   next();
 });
 
-app.get("/", (request, response) => {
-  response.send("Hello world!");
+app.get("/", (req, res) => {
+  res.send("Hello World");
 });
 
-app.get("/movies", api.getProduct);
+app.get("/products", api.getAllItems);
+app.get("/products/:id", api.getItem);
+app.post("/products", upload.single("imageUrl"), api.addItem);
+app.put("/products/:id", upload.single("imageUrl"), api.updateItem);
+app.delete("/products/:id", api.deleteItem);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on PORT ${PORT}`);
+  console.log(`Server is running on Port ${PORT}`);
 });
