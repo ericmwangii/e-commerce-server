@@ -18,20 +18,20 @@ services:
   products:
     build: ./products
     ports:
-      - "127.0.0.1:5000:5000"
+      - "5000:5000"
     depends_on:
       - db
 
   reviews:
     build: ./reviews
     ports:
-      - "127.0.0.1:5002:5002"
+      - "5002:5002"
     depends_on:
       - db
 
   searchproducts:
     build: ./searchproducts
     ports:
-      - "127.0.0.1:5001:8001"
+      - "5001:5001"
     depends_on:
       - db
