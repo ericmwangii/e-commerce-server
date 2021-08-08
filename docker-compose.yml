@@ -1,37 +1,41 @@
-version: "3.7"
+version: "3.8"
 services:
   db:
     image: postgres
-    env_file: ./.env
     environment:
+      POSTGRES_DB: advprog
       POSTGRES_PASSWORD: sf90hv6
       POSTGRES_USER: eric
-      host: localhost
-      database: advprog
-      password: sf90hv6
-      port: 5432
+    ports:
+      - "2345:5432"
+
     volumes:
-      - ./pgdata:/var/lib/postgres/data
-      #  ports:
-      #   - "5432: 5432"
+      - ./migrations:/docker-entrypoint-initdb.d
+      # - data:/var/lib/postgressql/data
 
   products:
     build: ./products
-    ports:
-      - "5000:5000"
     depends_on:
       - db
+    ports:
+      - "5000:5000"
 
   reviews:
     build: ./reviews
-    ports:
-      - "5002:5002"
     depends_on:
       - db
+    ports:
+      - "5002:5002"
 
   searchproducts:
     build: ./searchproducts
-    ports:
-      - "5001:5001"
     depends_on:
       - db
+
+    ports:
+      - "5001:5001"
+
+  buy:
+    build: ./buy
+    ports:
+      - "5003:5003"

@@ -30,6 +30,6 @@ app.post("/reviews", api.addReview);
 app.put("/review/:reviewId", api.updateReview);
 app.delete("/review/:reviewId", api.deleteReview);
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on Port ${PORT}`);
 });

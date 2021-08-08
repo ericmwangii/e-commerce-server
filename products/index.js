@@ -31,6 +31,6 @@ app.post("/products", upload.single("imageUrl"), api.addItem);
 app.put("/products/:id", upload.single("imageUrl"), api.updateItem);
 app.delete("/products/:id", api.deleteItem);
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on Port ${PORT}`);
 });
