@@ -6,4 +6,4 @@ Create a postgres user or use default user and chenger the values in each api.js
 
 Cd into each directory and run npm install. 
 
-Finally run docker-compose up to test the endpoints.
+Finally run docker-compose up to test the endpoints i.e localhost:5000/products
