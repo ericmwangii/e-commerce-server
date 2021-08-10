@@ -1,5 +1,5 @@
 CREATE TABLE items(
-   id SERIAL 
+   id SERIAL,
    name TEXT,
    imageurl TEXT,
    price INT

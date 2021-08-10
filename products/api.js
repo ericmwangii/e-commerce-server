@@ -10,7 +10,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-//post review
+//add item
 const addItem = async (request, response) => {
   const result = await cloudinary.uploader.upload(request.file.path);
 
