@@ -11,7 +11,7 @@ services:
 
     volumes:
       - ./migrations:/docker-entrypoint-initdb.d
-      # - data:/var/lib/postgressql/data
+      # - ./pgdata:/var/lib/postgres/data
 
   products:
     build: ./products
@@ -27,15 +27,14 @@ services:
     ports:
       - "5002:5002"
 
-  searchproducts:
-    build: ./searchproducts
-    depends_on:
-      - db
-
-    ports:
-      - "5001:5001"
-
   buy:
     build: ./buy
     ports:
       - "5003:5003"
+
+  analytics:
+    build: ./kafka
+    depends_on:
+      - db
+    ports:
+      - "5001:5001"

@@ -13,7 +13,7 @@ const getProduct = (request, response) => {
   let name = request.query.name;
 
   pool.query(
-    "SELECT * FROM items WHERE name = $1",
+    "SELECT * FROM items WHERE name = $1 IS NULL OR name =$1",
     [name],
     (error, results) => {
       if (error) {

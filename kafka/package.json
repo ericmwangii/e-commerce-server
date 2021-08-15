@@ -1,5 +1,5 @@
 {
-  "name": "buy",
+  "name": "kafka",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,10 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sendgrid/mail": "^7.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "node-rdkafka": "^2.11.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "pg": "^8.7.1",
+    "pg-format": "^1.0.4"
   }
 }
