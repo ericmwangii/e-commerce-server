@@ -56,6 +56,7 @@ producer.on("event.error", function (err) {
   console.error(err);
 });
 
+//buy
 app.post("/buy", (request, response) => {
   const { email, moviename, total, address, topic, button_id } = request.body;
 
@@ -65,6 +66,47 @@ app.post("/buy", (request, response) => {
     subject: `Order for ${moviename}`,
     text: "Order from Burudani",
     html: `<p>Your order for <b>${moviename}</b> is being processed and will arrive at your ${address} in three to five business days. It costs Ksh ${total}. Pay on Delivery.</p>`,
+  };
+
+  sgMail
+    .send(msg)
+    .then(() => {
+      // console.log(msg);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  try {
+    const topic = "purchases";
+    // console.log(topic);
+
+    producer.produce(
+      topic,
+      null,
+      Buffer.from(
+        JSON.stringify({ moviename, email, total, topic, button_id })
+      ),
+      null,
+      Date.now()
+    );
+  } catch (err) {
+    console.log("Problem Occurred when sending message");
+    throw err;
+  }
+  response.status(200).send("Success");
+});
+
+//rent
+app.post("/rent", (request, response) => {
+  const { email, moviename, total, address, topic, button_id } = request.body;
+
+  const msg = {
+    to: email,
+    from: "hitwizard99@gmail.com",
+    subject: `Order for ${moviename}`,
+    text: "Order from Burudani",
+    html: `<p>Your order for <b>${moviename}</b> is being processed and will arrive at your ${address} in three to five business days. It costs Ksh ${total}. Pay on Delivery. Items need to be returned in two weeks or penalties will occur!</p>`,
   };
 
   sgMail
