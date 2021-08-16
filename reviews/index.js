@@ -25,10 +25,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/reviews", api.getReviews);
-app.get("/review/:reviewId", api.getReviewById);
+app.get("/review/:reviewid", api.getReviewById);
 app.post("/reviews", api.addReview);
-app.put("/review/:reviewId", api.updateReview);
-app.delete("/review/:reviewId", api.deleteReview);
+app.delete("/review/:reviewid", api.deleteReview);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on Port ${PORT}`);

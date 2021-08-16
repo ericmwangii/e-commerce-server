@@ -11,11 +11,11 @@ const pool = new Pool({
 
 //post review
 const addReview = (request, response) => {
-  const { userId, username, moviename, image, review, reviewId } = request.body;
+  const { userId, username, moviename, review, reviewid } = request.body;
 
   pool.query(
-    "INSERT INTO reviews ( userId, username,moviename,image,review, reviewId) VALUES ($1, $2, $3, $4, $5, $6)",
-    [userId, username, moviename, image, review, reviewId],
+    "INSERT INTO reviews ( userId, username, moviename, review, reviewid) VALUES ($1, $2, $3, $4, $5)",
+    [userId, username, moviename, review, reviewid],
     (error, results) => {
       if (error) {
         throw error;
@@ -41,11 +41,11 @@ const getReviews = (request, response) => {
 
 //get by id
 const getReviewById = (request, response) => {
-  const reviewId = request.params.reviewId;
+  const reviewid = request.params.reviewid;
 
   pool.query(
-    "SELECT * FROM reviews WHERE reviewId = $1",
-    [reviewId],
+    "SELECT * FROM reviews WHERE reviewid = $1",
+    [reviewid],
     (error, results) => {
       if (error) {
         throw error;
@@ -55,36 +55,18 @@ const getReviewById = (request, response) => {
   );
 };
 
-//updateReview
-const updateReview = (request, response) => {
-  const reviewId = request.params.reviewId;
-
-  const { review } = request.body;
-
-  pool.query(
-    "UPDATE reviews SET review = $1 WHERE reviewId =$2",
-    [review, reviewId],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(`Review with id ${reviewId} has been modified`);
-    }
-  );
-};
-
 //Delete review
 const deleteReview = (request, response) => {
-  const reviewId = request.params.reviewId;
+  const reviewid = request.params.reviewid;
 
   pool.query(
-    "DELETE FROM reviews WHERE reviewId = $1",
-    [reviewId],
+    "DELETE FROM reviews WHERE reviewid = $1",
+    [reviewid],
     (error, results) => {
       if (error) {
         throw error;
       }
-      response.status(200).json(`Review id ${reviewId} has been deleted`);
+      response.status(200).json(`Review id ${reviewid} has been deleted`);
     }
   );
 };
@@ -93,6 +75,5 @@ module.exports = {
   addReview,
   getReviews,
   getReviewById,
-  updateReview,
   deleteReview,
 };

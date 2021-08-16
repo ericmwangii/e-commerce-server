@@ -34,11 +34,9 @@ var consumer = new Kafka.KafkaConsumer(
     "enable.auto.commit": false,
     offset_commit_cb: function (err, topicPartitions) {
       if (err) {
-        // There was an error committing
         console.error("There was an error committing");
         console.error(err);
       } else {
-        // Commit went through. Let's log the topic partitions
         console.log("New offset successfully committed.");
       }
     },
@@ -58,7 +56,7 @@ consumer.connect({}, (err, data) => {
 
 let productClicks = {};
 
-//save clicks and page loads every 60 seconds, or every 5 seconds locally
+//save clicks every 60 seconds
 setInterval(saveStatsToPostgres, sslFlag ? 60000 : 5000);
 
 function saveStatsToPostgres() {
