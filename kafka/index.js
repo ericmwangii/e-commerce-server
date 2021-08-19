@@ -9,28 +9,13 @@ const sslFlag = true;
 const CLICK_KAFKA_TOPIC = "purchases";
 
 // Connect to postgres
-const pool = new Pool({
-  user: "eric",
-  host: "db",
-  database: "advprog",
-  password: "sf90hv6",
-  port: 5432,
-});
+const pool = new Pool({});
 
 // Kafka
 let kafkaTopics = "purchases";
 
 var consumer = new Kafka.KafkaConsumer(
   {
-    "client.id": "lkc-vo6pj",
-    "group.id": "purchases",
-    "metadata.broker.list": "pkc-lzvrd.us-west4.gcp.confluent.cloud:9092",
-    "security.protocol": "SSL",
-    "security.protocol": "SASL_SSL",
-    "sasl.mechanisms": "PLAIN",
-    "sasl.username": "2KRXRXOBEROGKM57",
-    "sasl.password":
-      "m0EVl0obXqHumBEHzxOG4DHrT9CSy8A94o0M9qVjvrO9bGH30dV2DGw25lJRGoqk",
     "enable.auto.commit": false,
     offset_commit_cb: function (err, topicPartitions) {
       if (err) {
