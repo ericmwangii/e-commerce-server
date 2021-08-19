@@ -6,9 +6,7 @@ const Kafka = require("node-rdkafka");
 
 app.use(cors());
 
-sgMail.setApiKey(
-  "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"
-);
+sgMail.setApiKey();
 
 const PORT = process.env.PORT || 5003;
 
@@ -25,16 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //kafka
-const producer = new Kafka.Producer({
-  "client.id": "lkc-vo6pj",
-  "metadata.broker.list": "pkc-lzvrd.us-west4.gcp.confluent.cloud:9092",
-  "security.protocol": "SSL",
-  "security.protocol": "SASL_SSL",
-  "sasl.mechanisms": "PLAIN",
-  "sasl.username": "2KRXRXOBEROGKM57",
-  "sasl.password":
-    "m0EVl0obXqHumBEHzxOG4DHrT9CSy8A94o0M9qVjvrO9bGH30dV2DGw25lJRGoqk",
-});
+const producer = new Kafka.Producer({});
 
 // connnect to broker manually
 producer.connect({}, (err, data) => {
