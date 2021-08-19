@@ -4,7 +4,7 @@ services:
     image: postgres
     environment:
       POSTGRES_DB: advprog
-      POSTGRES_PASSWORD: sf90hv6
+      POSTGRES_PASSWORD: 
       POSTGRES_USER: eric
     ports:
       - "2345:5432"
